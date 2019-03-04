@@ -1,7 +1,24 @@
 import React from 'react';
-import {Static, graphql} from 'gatsby';
+import {StaticQuery, graphql} from 'gatsby';
 
 import Layout from '../components/layout';
+
+const getMarkdownPosts = graphql `
+{
+  allMarkdownRemark {
+    totalCount
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          date
+        }
+        excerpt
+      }
+    }
+  }
+}`;
 
 export default () => (
   <Layout>
@@ -11,6 +28,14 @@ export default () => (
       >
         Gatsby Couture blog
       </h1>
+      <StaticQuery 
+        query={getMarkdownPosts}
+        render={data => (
+          <>
+            <h4>{data.allMarkdownRemark.totalCount}</h4>
+          </>
+        )}
+      />
     </div>
   </Layout>
 )
