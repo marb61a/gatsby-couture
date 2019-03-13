@@ -30,9 +30,22 @@ const ProductTemplate = ({ data: { contentfulProduct }, location }) => (
           borderRadius: '5px',
           cursor: 'pointer',
         }}
+        className="snipcart-add-item"
+        data-item-id={contentfulProduct.slug}
+        data-item-price={contentfulProduct.price}
+        data-item-image={contentfulProduct.image.file.url}
+        data-item-name={contentfulProduct.name}
+        data-item-url={location.pathname}
       >
-      
+        Add to cart
       </button>
+      <Img 
+        style={{
+          margin: '0 auto',
+          maxWidth: 600
+        }}
+        fluid={contentfulProduct.image.fluid}
+      />
     </div>
   </Layout>  
 )

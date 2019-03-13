@@ -27,7 +27,22 @@ class Products extends React.Component {
 }
 
 export const query = graphql `
-
+  allContentfulProduct {
+    edges {
+      node {
+        id
+        slug
+        name
+        price
+        private
+        image {
+          fluid(maxWidth: 400) {
+            ...GatsbyContentfulFluid_tracedSVG
+          }
+        }
+      }
+    }
+  }
 `;
 
 export default Products
