@@ -5,7 +5,16 @@ import Layout from '../components/layout'
 
 const getImageData = graphql `
   {
-
+    allFile {
+      edges {
+        node {
+          relativePath
+          size
+          extension
+          birthTime
+        }
+      }
+    }
   }
 `;
 
