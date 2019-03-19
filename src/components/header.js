@@ -13,7 +13,7 @@ const NavLink = props => <Link getProps={isActive} {...props} />
 
 class Header extends React.Component {
   componentDidMount() {
-
+    netlifyIdentity.init()
   }
 
   render() {
@@ -53,7 +53,36 @@ class Header extends React.Component {
                 width: '50px',
               }}
             />
+            <h1 style={{margin: 0}}>
+              <NavLink to="/">{siteTitle}</NavLink>
+            </h1>
           </span>
+          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/products">Store</NavLink>
+          <div data-netlify-identity-menu />
+
+          {/* Shopping Cart summary */}
+          <div 
+            style={{color: 'white', cursor: 'pointer'}}
+            className="snipcart-summary snipcart-checkout"
+          >
+            <div>
+              <strong>My Cart</strong>  
+            </div>
+            <div>
+              <span 
+                style={{ fontWeight: 'bold' }}
+                className="snipcart-total-items"
+              />{' '}
+            </div>
+            <div>
+              Total Price{' '}
+              <span 
+                style={{ fontWeight: 'bold' }}
+                className="snipcart-total-price"
+              />
+            </div>
+          </div>
         </div>
       </div>
     )
