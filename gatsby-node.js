@@ -1,7 +1,11 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+const path = require('path')
+const { createFilePath } = require('gatsby-source-filesystem')
 
-// You can delete this file if you're not using it
+const PostTemplate = path.resolve('./src/templates/post-template.js')
+const BlogTemplate = path.resolve('./src/templates/blog-template.js')
+const ProductTemplate = path.resolve('./src/templates/product-template.js')
+
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions
+  
+}

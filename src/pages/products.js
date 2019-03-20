@@ -11,10 +11,19 @@ class Products extends React.Component {
 
   componentDidMount() {
     this.getProducts()
+    netlifyIdentity.on('login', user => this.getProducts(user))
+    netlifyIdentity.on('logout', () => this.getProducts())
   }
 
   getProducts = user => {
     console.log('Current User', user)
+    const allProducts = this.props.data.allContentfulProduct.edges
+    const products = netlifyIdentity.currentUser() !== null
+      ? allProducts
+      : allProducts.filter(({ node: product }) => !product.private)
+    this.setState({
+      products
+    })
   }
 
   render() {
@@ -48,6 +57,10 @@ class Products extends React.Component {
                     </span>
                   </h3>
                 </Link>
+                <Img 
+                  style={{ maxWidth: 400 }}
+                  fluid={product.image.fluid}
+                />
               </div>
             ))
           }
@@ -74,6 +87,6 @@ export const query = graphql `
       }
     }
   }
-`;
+`
 
 export default Products
