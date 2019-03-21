@@ -18,3 +18,39 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   }
 }
 
+exports.createPages = async({ graphql, actions }) => {
+  const { createPage } = actions 
+  const result = await graphql(`
+    {
+      allMarkdownRemark(limit: 1000) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+        }
+      }
+
+      allContentfulProduct {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `)
+}
+
+const posts = result.data.allMarkdownRemark.edges
+posts.forEach(({ node: post }) => {
+  createPage({
+    path: `posts${post.fields.slug}`,
+    component: PostTemplate,
+    context: {
+      slug: post.fields.slug
+    }
+  })
+})
+
