@@ -6,7 +6,7 @@ import Layout from '../components/layout'
 const PostTemplate = ({data: post }) => (
   <Layout>
     <div>
-      <h1>{post.markdownremark.frontmatter.title}</h1>
+      <h1>{post.markdownRemark.frontmatter.title}</h1>
       <h4>
         {post.markdownRemark.timeToRead}{' '}
         {post.markdownRemark.timeToRead > 1 ? 'minutes' : 'minute'}
@@ -18,7 +18,7 @@ const PostTemplate = ({data: post }) => (
   </Layout>
 )
 
-export const query = graphql `
+export const query = graphql`
   query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html

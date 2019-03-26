@@ -69,7 +69,7 @@ export default ({ data, pageContext }) => {
           {
             !isLastPage && (
               <Link to={nextPage} rel="next">
-                Next page
+                Next Page
               </Link>
             )
           }
@@ -80,15 +80,16 @@ export default ({ data, pageContext }) => {
 }
 
 export const query = graphql `
-  ($skip: Int!, $limit: Int!) {
-    allMarkdownRemark (
+  query ($skip: Int!, $limit: Int!) {
+    allMarkdownRemark(
       skip: $skip
       limit: $limit
       sort: { order: DESC, fields: [frontmatter___date] }
     ) {
       totalCount
       edges {
-        fields {
+        node {
+          fields {
           slug
         }
         id
@@ -97,6 +98,7 @@ export const query = graphql `
           date(formatString: "MMMM Do, YYYY")
         }
         excerpt
+        }
       }
     }
   }

@@ -54,18 +54,22 @@ export default ProductTemplate
 
 export const query = graphql`
   query($slug: String!) {
-    slug
-    name
-    price
-    description
-    createdAt(formatString: "MMMM Do, YYYY, h:mm:ss a")
-    image {
-      fluid(maxWidth: 800) {
-        ...GatsbyContentfulFluid
-      }
-      file {
-        url
+    contentfulProduct(slug: { eq: $slug }) {
+      slug
+      name
+      price
+      description
+      createdAt(formatString: "MMMM Do, YYYY, h:mm:ss a")
+      image {
+        fluid(maxWidth: 800) {
+          ...GatsbyContentfulFluid
+        }
+        file {
+          url
+        }
       }
     }
   }
 `
+
+export default ProductTemplate
