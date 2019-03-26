@@ -1,12 +1,13 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
 import Img from 'gatsby-image'
+import netlifyIdentity from 'netlify-identity-widget'
 
 import Layout from '../components/layout'
 
 class Products extends React.Component {
   state = {
-    products: []
+    products: [],
   }
 
   componentDidMount() {
@@ -70,18 +71,20 @@ class Products extends React.Component {
   }  
 }
 
-export const query = graphql `
-  allContentfulProduct {
-    edges {
-      node {
-        id
-        slug
-        name
-        price
-        private
-        image {
-          fluid(maxWidth: 400) {
-            ...GatsbyContentfulFluid_tracedSVG
+export const query = graphql`
+  {
+    allContentfulProduct {
+      edges {
+        node {
+          id
+          slug
+          name
+          price
+          private
+          image {
+            fluid(maxWidth: 400) {
+              ...GatsbyContentfulFluid_tracedSVG
+            }
           }
         }
       }
